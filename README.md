@@ -1,133 +1,243 @@
+# **Study Notion**
 
-# StudyNotion - EdTech Platform
-:rocket: [Link to website][https://studynotion-frontend.vercel.app/]
+A comprehensive web application designed to provide news and updates within a specific district, featuring admin-controlled content management, user authentication, and a responsive user interface.
 
+## **Table of Contents**
 
-![Main Page](images/mainpage.png)
-StudyNotion is a fully functional EdTech platform that enables users to create, consume, and rate educational content. The platform is built using the MERN stack, which includes ReactJS, NodeJS, MongoDB, and ExpressJS.
-
-## Table of Contents
-
-- [Introduction](#introduction)
-- [System Architecture](#system-architecture)
-  - [Front-end](#front-end)
-  - [Back-end](#back-end)
-  - [Database](#database)
-  - [Architecture Diagram](#architecture-diagram)
-- [API Design](#api-design)
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Prerequisites](#prerequisites)
 - [Installation](#installation)
-- [Configuration](#configuration)
 - [Usage](#usage)
+- [Admin Authentication](#admin-authentication)
+- [Environment Variables](#environment-variables)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
 
+## **Overview**
 
-## Introduction
+This project is designed to be a scalable, secure, and user-friendly platform that allows users to access district-specific news, updates, and advertisements. The platform is managed by admins, who have exclusive access to create, update, and delete content. The application incorporates authentication and authorization mechanisms to ensure that only authorized personnel can modify content.
 
-StudyNotion aims to provide a seamless and interactive learning experience for students, making education more accessible and engaging. Additionally, the platform serves as a platform for instructors to showcase their expertise and connect with learners across the globe.
+## **Features**
 
-In the following sections, we will cover the technical details of the platform, including the system architecture, API design, installation, usage instructions, and potential future enhancements.
+- **User Authentication & Authorization:**
+  - Secure login and registration system using JWT (JSON Web Tokens).
+  - Role-based access control (RBAC) to differentiate between users and admins.
 
-## System Architecture
+- **Admin Panel:**
+  - Admins can manage news, updates, and advertisements.
+  - Only admins can post, edit, or delete content, ensuring content integrity.
 
-The StudyNotion EdTech platform consists of three main components: the front-end, the back-end, and the database. The platform follows a client-server architecture, with the front-end serving as the client and the back-end and database serving as the server.
+- **Responsive Design:**
+  - The application is mobile-first, ensuring it works seamlessly on all devices.
+  - The UI is optimized for both dark and light themes.
 
-### Front-end
+- **Dynamic Content Management:**
+  - Real-time updates for news and advertisements.
+  - Integrated with a rich text editor for content creation.
 
-The front-end of the platform is built using ReactJS, which allows for the creation of dynamic and responsive user interfaces, crucial for providing an engaging learning experience to students. The front-end communicates with the back-end using RESTful API calls.
+- **Security:**
+  - Encrypted passwords using bcrypt.
+  - Secure API routes protected by JWT middleware.
 
-#### Front End Pages
+- **Performance Optimizations:**
+  - Lazy loading for images and other resources.
+  - Efficient database queries to minimize load times.
 
-For Students:
+## **Tech Stack**
 
-- **Homepage:** A brief introduction to the platform with links to the course list and user details.
-- **Course List:** A list of all the courses available on the platform, along with their descriptions and ratings.
-- **Wishlist:** Displays all the courses that a student has added to their wishlist.
-- **Cart Checkout:** Allows the user to complete course purchases.
-- **Course Content:** Presents the course content for a particular course, including videos and related material.
-- **User Details:** Provides details about the student's account, including their name, email, and other relevant information.
-- **User Edit Details:** Allows students to edit their account details.
+- **Frontend:**
+  - **React.js:** For building a dynamic and interactive user interface.
+  - **Tailwind CSS:** For styling and responsive design.
+  - **Axios:** For handling HTTP requests to the backend.
 
-For Instructors:
+- **Backend:**
+  - **Node.js & Express:** For handling server-side logic and API routes.
+  - **MongoDB & Mongoose:** For database management and object modeling.
+  - **JWT:** For handling authentication and securing API endpoints.
 
-- **Dashboard:** Offers an overview of the instructor's courses, along with ratings and feedback for each course.
-- **Insights:** Provides detailed insights into the instructor's courses, including the number of views, clicks, and other relevant metrics.
-- **Course Management Pages:** Enables instructors to create, update, and delete courses, as well as manage course content and pricing.
-- **View and Edit Profile Details:** Allows instructors to view and edit their account details.
+- **DevOps:**
+  - **Docker:** For containerizing the application and simplifying deployment.
+  - **NGINX:** For serving the frontend and reverse proxying requests to the backend.
 
-#### Front-end Tools and Libraries
+## **Architecture**
 
-To build the front-end, we use frameworks and libraries such as ReactJS, CSS, and Tailwind for styling, and Redux for state management.
+The application follows a typical MERN (MongoDB, Express, React, Node.js) architecture:
 
-### Back-end
+1. **Client-Side:**
+   - The React frontend interacts with the backend via RESTful APIs.
+   - The UI components are modular and reusable, ensuring scalability and maintainability.
 
-The back-end of the platform is built using NodeJS and ExpressJS, providing APIs for the front-end to consume. These APIs include functionalities such as user authentication, course creation, and course consumption. The back-end also handles the logic for processing and storing the course content and user data.
+2. **Server-Side:**
+   - The Express server handles API requests, processes data, and interacts with the MongoDB database.
+   - Authentication middleware secures routes, ensuring that only authorized users can access certain endpoints.
 
-#### Back-end Features
+3. **Database:**
+   - MongoDB serves as the primary database, storing user information, news posts, advertisements, and admin credentials.
+   - Mongoose models and schemas are used to enforce data structure and integrity.
 
-- **User Authentication and Authorization:** Students and instructors can sign up and log in to the platform using their email addresses and passwords. The platform also supports OTP (One-Time Password) verification and forgot password functionality for added security.
-- **Course Management:** Instructors can create, read, update, and delete courses, as well as manage course content and media. Students can view and rate courses.
-- **Payment Integration:** Students will purchase and enroll in courses by completing the checkout flow, followed by Razorpay integration for payment handling.
-- **Cloud-based Media Management:** StudyNotion uses Cloudinary, a cloud-based media management service, to store and manage all media content, including images, videos, and documents.
-- **Markdown Formatting:** Course content in document format is stored in Markdown format, allowing for easier display and rendering on the front-end.
+## **Prerequisites**
 
-#### Back-end Frameworks, Libraries, and Tools
+Before you begin, ensure you have met the following requirements:
 
-The back-end of StudyNotion uses various frameworks, libraries, and tools to ensure its functionality and performance, including:
+- **Node.js** (v14.x.x or later)
+- **MongoDB** (v4.x.x or later)
+- **npm** (v6.x.x or later)
+- **Docker** (Optional for containerized deployment)
 
-- **Node.js:** Used as the primary framework for the back-end.
-- **Express.js:** Used as a web application framework, providing a range of features and tools for building web applications.
-- **MongoDB:** Used as the primary database, providing a flexible and scalable data storage solution.
-- **JWT (JSON Web Tokens):** Used for authentication and authorization, providing a secure and reliable way to manage user credentials.
-- **Bcrypt:** Used for password hashing, adding an extra layer of security to user data.
-- **Mongoose:** Used as an Object Data Modeling (ODM) library, providing a way to interact with MongoDB using JavaScript.
+## **Installation**
 
-#### Data Models and Database Schema
+Follow these steps to set up the project locally:
 
-The back-end of StudyNotion uses several data models and database schemas to manage data, including:
-
-- **Student Schema:** Includes fields such as name, email, password, and course details for each student.
-- **Instructor Schema:** Includes fields such as name, email, password, and course details for each instructor.
-- **Course Schema:** Includes fields such as course name, description, instructor details, and media content.
-
-### Database
-
-The database for the platform is built using MongoDB, a NoSQL database that provides a flexible and scalable data storage solution. MongoDB allows for the storage of unstructured and semi-structured data. The database stores the course content, user data, and other relevant information related to the platform.
-
-![Database Schema](images/schema.png)
-
-### Architecture Diagram
-
-Below is a high-level diagram that illustrates the architecture of the StudyNotion EdTech platform:
-
-![Architecture](images/architecture.png)
-
-## API Design
-
-The StudyNotion platform's API is designed following the REST architectural style. The API is implemented using Node.js and Express.js. It uses JSON for data exchange and follows standard HTTP request methods such as GET, POST, PUT, and DELETE.
-
-For detailed API documentation and endpoints, refer to the [API Documentation](/api-docs).
-
-## Installation
-
-1. Clone the repository: `git clone https://github.com/username/repo.git`
-2. Navigate to the project directory: `cd StudyNotion`
-3. Install dependencies: `npm install`
-
-## Configuration
-
-1. Set up a MongoDB database and obtain the connection URL.
-2. Create a `.env` file in the root directory with the following environment variables:
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
    ```
-   MONGODB_URI=<your-mongodb-connection-url>
-   JWT_SECRET=<your-jwt-secret-key>
+2. **Navigate to the project directory:**
+   ```bash
+   cd your-repo
+   ```
+3. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+4. **Set up MongoDB:**
+   - Ensure MongoDB is running on your local machine or a remote server.
+   - You can also use Docker to set up MongoDB:
+     ```bash
+     docker run -d -p 27017:27017 --name mongodb mongo
+     ```
+
+5. **Configure environment variables:**
+   - Create a `.env` file in the root directory with the following variables:
+
+     ```env
+     MONGO_URI=mongodb://localhost:27017/your-database
+     JWT_SECRET=your_jwt_secret
+     ADMIN_EMAIL=admin@example.com
+     ADMIN_PASSWORD=admin123
+     ```
+
+6. **Run the development server:**
+   ```bash
+   npm run dev
    ```
 
-## Usage
+## **Usage**
 
-1. Start the server: `npm start`
-2. Open a new terminal and navigate to the `client` directory: `cd client`
-3. Start the React development server: `npm start`
+### **Starting the Application**
 
-Access the application in your browser at `http://localhost:3000`.
+1. **Frontend:**
+   - The frontend is served from `http://localhost:3000`.
+   - You can access the user-facing site and explore the news and updates.
 
+2. **Backend:**
+   - The backend server is running on `http://localhost:5000`.
+   - All API endpoints are prefixed with `/api`.
+
+### **Accessing the Admin Panel**
+
+1. Navigate to `http://localhost:3000/admin`.
+2. Enter the admin credentials (email and password) as set in the `.env` file.
+3. Once authenticated, you can manage all the content on the platform.
+
+### **Creating and Managing Content**
+
+- **News/Updates:**
+  - Admins can post new articles, edit existing ones, or delete them.
+  - Articles support rich text formatting, images, and videos.
+
+- **Advertisements:**
+  - Only admins can manage advertisements. This includes uploading media, setting display durations, and targeting specific audiences.
+
+## **Admin Authentication**
+
+### **Authentication Process**
+
+- **Registration:**
+  - Users register with their email and password. Admins can only be created manually or through a predefined process.
+  
+- **Login:**
+  - Both users and admins log in using their email and password.
+  - Upon successful login, a JWT token is generated and stored in the user's browser.
+
+- **Authorization:**
+  - JWT tokens are verified on every request to protected routes.
+  - Admin routes are further secured by role checks, ensuring only admins can access them.
+
+### **Security Considerations**
+
+- **Password Encryption:**
+  - Passwords are hashed using bcrypt before being stored in the database.
+  
+- **Token Expiry:**
+  - JWT tokens have an expiry time, ensuring users need to re-authenticate after a certain period.
+
+## **Environment Variables**
+
+The following environment variables are essential for running the application:
+
+- **`MONGO_URI`**: MongoDB connection string.
+- **`JWT_SECRET`**: Secret key for signing JWT tokens.
+- **`ADMIN_EMAIL`**: Default admin email for logging in.
+- **`ADMIN_PASSWORD`**: Default admin password.
+
+Example `.env` file:
+```env
+MONGO_URI=mongodb://localhost:27017/your-database
+JWT_SECRET=your_jwt_secret
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=admin123
+```
+
+## **Project Structure**
+
+```plaintext
+.
+├── backend
+│   ├── config        # Configuration files, including database connection
+│   ├── controllers   # Logic for handling requests and responses
+│   ├── models        # Mongoose models and schemas
+│   ├── routes        # API route definitions
+│   └── utils         # Utility functions and middleware
+├── frontend
+│   ├── public        # Public assets (e.g., images, fonts)
+│   ├── src
+│   │   ├── components  # Reusable UI components
+│   │   ├── pages       # Main pages (e.g., Home, Admin)
+│   │   ├── services    # API service functions
+│   │   └── styles      # Global and component-specific styles
+├── .env              # Environment configuration file
+├── package.json      # npm dependencies and scripts
+├── README.md         # Project documentation
+└── ...
+```
+
+## **Contributing**
+
+We welcome contributions to this project! To contribute:
+
+1. **Fork the repository:**
+   - Click the "Fork" button at the top-right of the repository page.
+2. **Clone your fork:**
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
+   ```
+3. **Create a new branch:**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+4. **Make your changes and commit them:**
+   ```bash
+   git commit -m "Add your descriptive commit message"
+   ```
+5. **Push to your fork:**
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+6. **Submit a Pull Request:**
+   - Go to the original repository and create a pull request from your fork.
 
 
